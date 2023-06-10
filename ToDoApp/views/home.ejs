@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <title>          
+            <%= tittle %>
+        </title>
+        <link rel="stylesheet" href="/css/style.css">
+    </head>
+    <body>
+        <section class="container">
+            <div class="heading">
+                <h1 class="main-heading">TO-DO APP</h1>
+            </div>
+            <!-- take input -->
+            <form action="/create-task" method="post">
+                <input type="text" name="description" id="first-input" placeholder="Write Task" required>
+                <div class="main-input-save">
+                    <div class="main-input">
+                        <div>
+                            <label for="second-input"><b>CATEGORY</b></label>
+                            <select name="category" id="second-input" required>
+                                <option>PERSONAL</option>
+                                <option>WORK</option>
+                                <option>SCHOOL</option>
+                                <option>OTHER</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="third-input"><b>DUE DATE</b></label>
+                            <input type="date" name="date" id="third-input" required>
+                        </div>
+                    </div>
+                    <div class="main-save">
+                        <input type="submit" id="add" value="ADD TASK">
+                    </div>
+                </div>
+            </form>
+            <hr>
+            <!-- list render -->
+            <form action="/delete-task" method="get">
+                <div class="list-heading">
+                    <h4>Task List</h4>
+                    <div>
+                        <input type="submit" value="DELETE TASKS">
+                    </div>
+                </div>
+                <% for(let i of task) { %>
+                    <div class="list-task-main">
+                        <div class="list-task">
+                            <input type="checkbox" name="<%= i._id %>">
+                            <div class="list-inside">
+                                <p id="task-description"><%= i.description %></p>
+                                <p id="due-date"><%= i.date %></p>
+                            </div>
+                        </div>
+                        <div class="task-cat">
+                            <p id="task-category"><%= i.category %></p>
+                        </div>
+                    </div>
+                <% } %>
+            </form>
+        </section>
+    </body>
+</html>
